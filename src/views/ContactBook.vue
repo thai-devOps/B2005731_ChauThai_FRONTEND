@@ -3,6 +3,7 @@ import InputSearch from '@/components/InputSearch.vue'
 import ContactList from '@/components/ContactList.vue'
 import ContactCard from '@/components/ContactCard.vue'
 import { getAll, deleteAll } from '@/services/contacts.service'
+import type { Contact } from '@/types/contact.type'
 
 export default {
   name: 'ContactBook',
@@ -41,7 +42,7 @@ export default {
     },
     activeContact() {
       if (this.activeIndex < 0) return null
-      return this.filteredContacts[this.activeIndex]
+      return this.filteredContacts[this.activeIndex] as Contact
     },
     filteredContactsCount() {
       return this.filteredContacts.length
@@ -62,7 +63,7 @@ export default {
     async removeAllContacts() {
       if (confirm('Bạn muốn xóa tất cả Liên hệ?')) {
         try {
-            await deleteAll().then((response) => response.data)
+          await deleteAll().then((response) => response.data)
           this.refreshList()
         } catch (error) {
           console.log(error)
@@ -70,7 +71,7 @@ export default {
       }
     },
     goToAddContact() {
-      this.$router.push({ name: 'contact.add' })
+      this.$router.push({ name: 'contact.create' })
     }
   },
   mounted() {
@@ -113,6 +114,14 @@ export default {
           <i class="fas fa-address-card"></i>
         </h4>
         <ContactCard :contact="activeContact" />
+        <router-link
+          :to="{
+            name: 'contact.edit',
+            params: { id: activeContact._id }
+          }"
+        >
+          <span class="mt-2 badge badge-warning"> <i class="fas fa-edit"></i> Hiệu chỉnh</span>
+        </router-link>
       </div>
     </div>
   </div>

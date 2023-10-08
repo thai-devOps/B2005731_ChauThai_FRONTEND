@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'contactbook',
       component: () => import('@/views/ContactBook.vue')
     },
     // route for page not found
@@ -13,6 +13,17 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFound.vue')
+    },
+    {
+      path: '/contacts/:id',
+      name: 'contact.edit',
+      component: () => import('@/views/ContactEdit.vue'),
+      props: true // Truyền các biến trong $route.params vào làm props
+    },
+    {
+      path: '/contacts/create',
+      name: 'contact.create',
+      component: () => import('@/views/CreateContact.vue')
     }
   ]
 })

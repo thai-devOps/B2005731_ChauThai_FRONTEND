@@ -1,25 +1,6 @@
 <script lang="ts">
 export default {
-  name: 'AppHeader',
-  data() {
-    return {
-      contacts: []
-    }
-  },
-  methods: {
-    getContacts() {
-      // this.$http.get('http://localhost:3000/contacts')
-      //     .then(response => {
-      //         this.contacts = response.body;
-      //     })
-      //     .catch(error => {
-      //         console.log(error);
-      //     });
-    }
-  },
-  mounted() {
-    this.getContacts()
-  }
+  name: 'AppHeader'
 }
 </script>
 <template>
@@ -39,9 +20,9 @@ export default {
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#"
+          <router-link to="/"
             ><span>Danh bạ</span> <i class="fa-solid fa-address-book"></i
-          ></a>
+          ></router-link>
         </li>
       </ul>
     </div>
